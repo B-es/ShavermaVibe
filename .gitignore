@@ -1,1 +1,15 @@
-Nothing needs to be added to the .gitignore file since only a TypeScript source file (`shawarma-nuxt/composables/useCart.ts`) was added, and no build artifacts, dependencies, or temporary files were included in the changes.
+# Dependencies
+node_modules/
+# Build artifacts
+dist/
+build/
+# Logs and temp files
+*.log
+*.tmp
+# Environment
+.env
+.env.local
+.env.*
+# Editors
+.vscode/
+.idea/
