@@ -10,10 +10,11 @@
     <section class="menu-content">
       <div class="wrap">
         <!-- Категории -->
-        <div class="categories">
+        <div class="categories" id="categories">
           <button
             v-for="cat in categories"
             :key="cat.id"
+            :id="cat.id"
             :class="['category-btn', { active: activeCategory === cat.id }]"
             @click="activeCategory = cat.id"
           >
@@ -36,15 +37,42 @@
 
 <script setup>
 import { PRODUCTS } from '~/composables/useCart'
+import { watch, onMounted, nextTick } from 'vue'
+
+const route = useRoute()
 
 const categories = [
   { id: 'all', label: 'Все' },
   { id: 'shawarma', label: 'Шаурма' },
+  { id: 'doner', label: 'Донер' },
+  { id: 'combo', label: 'Комбо' },
   { id: 'drinks', label: 'Напитки' },
-  { id: 'sides', label: 'Дополнения' },
 ]
 
 const activeCategory = ref('all')
+
+// Проверяем хэш из URL при загрузке и обновляем активную категорию
+onMounted(() => {
+  const hash = window.location.hash.replace('#', '')
+  if (hash && categories.some(c => c.id === hash)) {
+    activeCategory.value = hash
+  }
+})
+
+// Слушаем изменения хэша для навигации
+watch(() => route.hash, (newHash) => {
+  const hash = newHash.replace('#', '')
+  if (hash && categories.some(c => c.id === hash)) {
+    activeCategory.value = hash
+    // Плавный скролл к элементу категории
+    nextTick(() => {
+      const el = document.getElementById(hash)
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'center' })
+      }
+    })
+  }
+})
 
 const filteredProducts = computed(() => {
   if (activeCategory.value === 'all') {

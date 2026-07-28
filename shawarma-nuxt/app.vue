@@ -35,10 +35,10 @@
           </div>
           <div class="footer__col">
             <h4>Меню</h4>
-            <NuxtLink to="/menu">Шаурма</NuxtLink>
-            <NuxtLink to="/menu">Донер</NuxtLink>
-            <NuxtLink to="/menu">Комбо</NuxtLink>
-            <NuxtLink to="/menu">Напитки</NuxtLink>
+            <NuxtLink to="/menu#shawarma">Шаурма</NuxtLink>
+            <NuxtLink to="/menu#doner">Донер</NuxtLink>
+            <NuxtLink to="/menu#combo">Комбо</NuxtLink>
+            <NuxtLink to="/menu#drinks">Напитки</NuxtLink>
           </div>
           <div class="footer__col">
             <h4>Контакты</h4>
