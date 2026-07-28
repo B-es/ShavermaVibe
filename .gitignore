@@ -6,33 +6,78 @@ node_modules/
 dist/
 build/
 .nuxt/
+output/
+
+# Logs and temp files
+*.log
+*.tmp
 
 # Environment variables
 .env
 .env.local
 *.env.*
 
-# Editor files
+# Editors
 .vscode/
 .idea/
-*.swp
-*.swo
-*.tmp
 
-# Logs
-*.log
+# OS generated files
+.DS_Store
+Thumbs.db
 
-# Python cache
+# Python
 __pycache__/
 *.pyc
 *.pyo
 *.pyd
-
-# Coverage reports
-coverage/
-htmlcov/
+.Python
+env/
+venv/
+.venv/
+pip-log.txt
+pip-delete-this-directory.txt
+.tox/
 .coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.log
+.git/modules/
+*.sublime-workspace
+.pytest_cache/
+.mypy_cache/
+.hypothesis/
 
-# Local configuration
+# Node.js
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+node_modules/
+dist/
+build/
+.nuxt/
+.next/
+out/
+coverage/
 .nyc_output/
+*.tsbuildinfo
+next-env.d.ts
+
+# General
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Icon?
+.directory
+.fuse_hidden*
+*.swp
+*.swo
+*~
+.DS_Store
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
 ```

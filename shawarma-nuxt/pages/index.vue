@@ -206,7 +206,7 @@ definePageMeta({
   gap: 9px;
   background: #fff;
   border: 2px solid rgba(214, 40, 40, 0.22);
-  color: #d62828;
+  color: var(--red);
   font-weight: 700;
   font-size: 12px;
   letter-spacing: 0.1em;
@@ -227,13 +227,13 @@ definePageMeta({
 
 .hero h1 .r2 {
   display: block;
-  color: #d62828;
+  color: var(--red);
 }
 
 .hero h1 .r3 {
   display: block;
   color: transparent;
-  -webkit-text-stroke: 2px #222;
+  -webkit-text-stroke: 2px var(--ink);
   font-size: 0.9em;
 }
 
@@ -277,31 +277,31 @@ definePageMeta({
 }
 
 .btn--red {
-  background: #d62828;
+  background: var(--red);
   color: #fff;
-  box-shadow: 0 20px 50px -18px rgba(214, 40, 40, 0.4);
+  box-shadow: var(--sh-warm);
 }
 
 .btn--red:hover {
-  background: #b91c1c;
+  background: var(--red-d);
   transform: translateY(-3px);
 }
 
 .btn--ghost {
   background: transparent;
-  color: #222;
+  color: var(--ink);
   border: 2px solid rgba(34, 34, 34, 0.22);
 }
 
 .btn--ghost:hover {
-  border-color: #f77f00;
-  color: #f77f00;
+  border-color: var(--orange);
+  color: var(--orange);
   transform: translateY(-3px);
 }
 
 .btn--yellow {
-  background: #fcbf49;
-  color: #222;
+  background: var(--yellow);
+  color: var(--ink);
   box-shadow: 0 18px 40px -14px rgba(252, 191, 73, 0.55);
 }
 
@@ -331,7 +331,7 @@ definePageMeta({
 
 .stat b i {
   font-style: normal;
-  color: #f77f00;
+  color: var(--orange);
 }
 
 .stat span {
@@ -438,14 +438,14 @@ definePageMeta({
 }
 
 .view-all {
-  color: #d62828;
+  color: var(--red);
   font-weight: 600;
   text-decoration: none;
   transition: 0.2s;
 }
 
 .view-all:hover {
-  color: #b91c1c;
+  color: var(--red-d);
 }
 
 .products-grid {
@@ -460,7 +460,7 @@ definePageMeta({
 }
 
 .promo-content {
-  background: linear-gradient(135deg, #fcbf49 0%, #f77f00 100%);
+  background: linear-gradient(135deg, var(--yellow) 0%, var(--orange) 100%);
   border-radius: 24px;
   padding: 48px;
   display: flex;
@@ -539,7 +539,7 @@ definePageMeta({
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  background: #f77f00;
+  background: var(--orange);
   color: #fff;
   display: grid;
   place-items: center;
@@ -554,11 +554,11 @@ definePageMeta({
 
 .review-author {
   font-weight: 600;
-  color: #222;
+  color: var(--ink);
 }
 
 .review-rating {
-  color: #fcbf49;
+  color: var(--yellow);
   font-size: 14px;
 }
 
