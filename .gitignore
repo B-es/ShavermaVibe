@@ -1,0 +1,55 @@
+```
+# Dependencies
+node_modules/
+
+# Build outputs
+dist/
+build/
+.nuxt/
+.output/
+
+# Environment variables
+.env
+.env.local
+*.env.*
+
+# Python related (in case Python is used alongside)
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+
+# Logs
+*.log
+
+# Coverage reports
+coverage/
+*.gcov
+*.lcov
+.htmlcov/
+
+# IDE specific
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS generated
+.DS_Store
+Thumbs.db
+
+# Testing
+.mypy_cache/
+.pytest_cache/
+.nyc_output/
+coverage/
+
+# Temporary files
+*.tmp
+*.temp
+```
