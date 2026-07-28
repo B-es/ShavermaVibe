@@ -1,26 +1,40 @@
 import { defineStore } from 'pinia'
-import type { Product, CartState } from '~/types/product'
+import type { Product, CartItem, CartState } from '~/types/product'
 
 export const useCartStore = defineStore('cart', {
   state: (): CartState => ({
     items: [],
     isOpen: false,
+    promo: undefined,
   }),
 
   getters: {
     totalItems(): number {
-      return this.items.reduce((sum, item) => sum + item.quantity, 0)
+      return this.items.reduce((sum, item) => sum + item.qty, 0)
     },
 
     totalPrice(): number {
-      return this.items.reduce(
-        (sum, item) => sum + item.product.price * item.quantity,
-        0
-      )
+      return this.items.reduce((sum, item) => sum + item.price * item.qty, 0)
     },
 
     hasItems(): boolean {
       return this.items.length > 0
+    },
+
+    subtotal(): number {
+      return this.totalPrice
+    },
+
+    discount(): number {
+      return this.subtotal > 1500 ? this.subtotal * 0.1 : 0
+    },
+
+    delivery(): number {
+      return this.subtotal >= 1000 ? 0 : 150
+    },
+
+    total(): number {
+      return this.subtotal - this.discount + this.delivery
     },
   },
 
@@ -29,37 +43,50 @@ export const useCartStore = defineStore('cart', {
       this.isOpen = !this.isOpen
     },
 
-    addToCart(product: Product, quantity: number = 1) {
+    closeCart() {
+      this.isOpen = false
+    },
+
+    addToCart(product: Product, qty: number = 1, sizeLabel: string = 'Стандарт', extrasLabel: string = '') {
       const existingItem = this.items.find(
-        (item) => item.product.id === product.id
+        (item) => item.id === product.id && item.sizeLabel === sizeLabel && item.extrasLabel === extrasLabel
       )
 
       if (existingItem) {
-        existingItem.quantity += quantity
+        existingItem.qty += qty
       } else {
-        this.items.push({ product, quantity })
+        this.items.push({ ...product, qty, sizeLabel, extrasLabel })
       }
 
       this.isOpen = true
     },
 
-    removeFromCart(productId: number) {
-      this.items = this.items.filter((item) => item.product.id !== productId)
+    removeFromCart(index: number) {
+      this.items.splice(index, 1)
     },
 
-    updateQuantity(productId: number, quantity: number) {
-      const item = this.items.find((item) => item.product.id === productId)
-      if (item) {
-        if (quantity <= 0) {
-          this.removeFromCart(productId)
+    increaseQty(index: number) {
+      if (this.items[index]) {
+        this.items[index].qty++
+      }
+    },
+
+    decreaseQty(index: number) {
+      if (this.items[index]) {
+        if (this.items[index].qty > 1) {
+          this.items[index].qty--
         } else {
-          item.quantity = quantity
+          this.removeFromCart(index)
         }
       }
     },
 
     clearCart() {
       this.items = []
+    },
+
+    setPromo(code?: string) {
+      this.promo = code
     },
   },
 })
