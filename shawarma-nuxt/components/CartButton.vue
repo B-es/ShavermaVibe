@@ -13,7 +13,7 @@ const cartStore = useCartStore()
     <ShoppingCart class="w-6 h-6" />
     <span
       v-if="cartStore.totalItems > 0"
-      class="absolute -top-1 -right-1 bg-primary text-white text-xs w-5 h-5 rounded-full flex items-center justify-center"
+      class="absolute -top-1 -right-1 bg-red text-white text-xs w-5 h-5 rounded-full flex items-center justify-center"
     >
       {{ cartStore.totalItems }}
     </span>

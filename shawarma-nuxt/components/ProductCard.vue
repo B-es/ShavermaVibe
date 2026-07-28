@@ -48,11 +48,11 @@ const addToCart = () => {
     </div>
     
     <div class="p-4">
-      <h3 class="text-lg font-bold text-secondary mb-2">{{ product.name }}</h3>
+      <h3 class="text-lg font-bold text-ink mb-2">{{ product.name }}</h3>
       <p class="text-gray-600 text-sm mb-4 line-clamp-2">{{ product.desc }}</p>
       
       <div class="flex items-center justify-between">
-        <span class="text-xl font-bold text-primary">{{ product.price }} ₽</span>
+        <span class="text-xl font-bold text-red">{{ product.price }} ₽</span>
         
         <button
           @click.prevent="addToCart"
