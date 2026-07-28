@@ -14,10 +14,5 @@ export default defineNuxtPlugin(() => {
     provide: {
       vueQueryClient,
     },
-    hooks: {
-      onAppRendered() {
-        // VueQueryPlugin is auto-registered via module
-      },
-    },
   }
 })
