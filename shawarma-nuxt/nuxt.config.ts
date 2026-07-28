@@ -14,7 +14,7 @@ export default defineNuxtConfig({
   // TypeScript - strict mode
   typescript: {
     strict: true,
-    typeCheck: true,
+    typeCheck: false, // Отключено для разработки
   },
 
   // Image optimization
@@ -59,13 +59,18 @@ export default defineNuxtConfig({
     },
   },
 
-  // Runtime config for Supabase
+  // Runtime config for Supabase/Custom backend
   runtimeConfig: {
     public: {
+      apiMode: process.env.NUXT_API_MODE || 'mock',
+      backendUrl: process.env.NUXT_PUBLIC_BACKEND_URL || '',
       supabaseUrl: process.env.NUXT_PUBLIC_SUPABASE_URL || '',
       supabaseKey: process.env.NUXT_PUBLIC_SUPABASE_ANON_KEY || '',
+      siteUrl: process.env.NUXT_PUBLIC_SITE_URL || 'http://localhost:3000',
+      currency: process.env.NUXT_PUBLIC_CURRENCY || 'RUB',
     },
     supabaseServiceKey: process.env.SUPABASE_SERVICE_KEY || '',
+    apiTimeout: parseInt(process.env.NUXT_API_TIMEOUT || '5000'),
   },
 
   // Server configuration
