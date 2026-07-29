@@ -3,115 +3,71 @@
         <!-- Hero Section -->
         <section class="hero">
             <div class="wrap hero__in">
-                <div class="hero__text">
-                    <div class="kicker">🔥 ГОРЯЧЕЕ ПРЕДЛОЖЕНИЕ</div>
+                <div>
+                    <span class="kicker">Готовим на огне с 2024 года</span>
                     <h1>
-                        НАСТОЯЩАЯ
-                        <span class="r2">ШАУРМА</span>
-                        <span class="r3">В ТВОЁМ ГОРОДЕ</span>
+                        Сочная<span class="r2">Шаурма</span
+                        ><span class="r3">за 5 минут</span>
                     </h1>
                     <p class="hero__sub">
-                        <b>Сочное мясо</b>, свежие овощи и фирменные соусы — всё
-                        в одном вкусе. Готовим при тебе за 3 минуты!
+                        Мясо с вертикального гриля, свежие овощи и
+                        <b>тот самый фирменный соус</b>. Соберём твой идеальный
+                        лаваш — горячим и хрустящим.
                     </p>
                     <div class="hero__cta">
-                        <NuxtLink to="/menu" class="btn btn--red">
-                            Заказать сейчас
-                            <span>→</span>
-                        </NuxtLink>
-                        <a href="#about" class="btn btn--ghost"
-                            >Узнать больше</a
+                        <NuxtLink to="/menu" class="btn btn--red"
+                            ><SvgIcon name="chevron-right" :size="18" /> Заказать сейчас</NuxtLink
+                        >
+                        <NuxtLink to="/about" class="btn btn--ghost"
+                            >О ресторане</NuxtLink
                         >
                     </div>
                     <div class="hero__stats">
                         <div class="stat">
-                            <b><i>25+</i></b>
-                            <span>видов шаурмы</span>
+                            <b>4.9 <i>★</i></b
+                            ><span>2 400+ отзывов</span>
                         </div>
                         <div class="stat">
-                            <b><i>4.9</i></b>
-                            <span>рейтинг в картах</span>
+                            <b>30 мин</b><span>средняя доставка</span>
                         </div>
                         <div class="stat">
-                            <b><i>3 мин</i></b>
-                            <span>среднее время готовки</span>
+                            <b>120 000+</b><span>заказов приготовлено</span>
                         </div>
                     </div>
                 </div>
                 <div class="stage">
                     <div class="stage__ring"></div>
-                    <div class="stage__hero-emoji">🌯</div>
+                    <div class="grill">
+                        <div class="grill__glow"></div>
+                        <div class="grill__steam"><b></b><b></b><b></b></div>
+                        <div v-if="hitProduct" class="product-visual" :style="{ background: hitProduct.bg }">
+                            <span>{{ hitProduct.emoji }}</span>
+                        </div>
+                        <div class="grill__tray"></div>
+                    </div>
+                    <div class="orbit">
+                        <span v-for="o in orbit" :key="o">{{ o }}</span>
+                    </div>
+                    <div v-if="hitProduct" class="sticker sticker--hit">Хит продаж</div>
+                    <div v-if="hitProduct" class="sticker sticker--price">от <b>{{ topProductPrice }}</b></div>
                 </div>
             </div>
         </section>
 
-        <!-- Features Section -->
-        <section id="about" class="features">
+        <!-- Why Us Section -->
+        <section class="why">
             <div class="wrap">
-                <h2 class="section-title">Почему выбирают нас</h2>
-                <div class="features-grid">
-                    <div class="feature-card">
-                        <div class="feature-icon">🔥</div>
-                        <h3>Готовим при тебе</h3>
-                        <p>
-                            Открытая кухня — видишь, как готовится твоя шаурма
-                        </p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon">🥬</div>
-                        <h3>Только свежее</h3>
-                        <p>Овощи нарезаем каждое утро, мясо маринуем сами</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon">👨‍🍳</div>
-                        <h3>Авторские соусы</h3>
-                        <p>
-                            12 видов фирменных соусов, которых нет больше нигде
-                        </p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon">🚗</div>
-                        <h3>Быстрая доставка</h3>
-                        <p>Бесплатно от 1000₽, привезём за 30 минут</p>
-                    </div>
+                <div class="sec-head">
+                    <h2>Почему <em>мы</em></h2>
+                    <p>Четыре причины, по которым к нам возвращаются</p>
                 </div>
-            </div>
-        </section>
-
-        <!-- Popular Products Section -->
-        <section class="popular">
-            <div class="wrap">
-                <div class="section-header">
-                    <h2 class="section-title">Хиты продаж</h2>
-                    <NuxtLink to="/menu" class="view-all"
-                        >Смотреть всё меню →</NuxtLink
-                    >
-                </div>
-                <div class="products-grid">
-                    <ProductCard
-                        v-for="product in popularProducts"
-                        :key="product.id"
-                        :product="product"
-                    />
-                </div>
-            </div>
-        </section>
-
-        <!-- Promo Banner -->
-        <section class="promo-banner">
-            <div class="wrap">
-                <div class="promo-content">
-                    <div class="promo-text">
-                        <span class="promo-label">🎁 АКЦИЯ</span>
-                        <h2>Скидка 15% на первый заказ</h2>
-                        <p>
-                            Используй промокод <b>START15</b> при оформлении
-                            заказа
-                        </p>
+                <div class="coupons">
+                    <div v-for="w in why" :key="w.num" class="coupon">
+                        <span class="coupon__ico"><SvgIcon :name="w.ico" :size="24" /></span>
+                        <div class="coupon__num">{{ w.num }}</div>
+                        <h3>{{ w.title }}</h3>
+                        <p>{{ w.text }}</p>
                     </div>
-                    <NuxtLink to="/menu" class="btn btn--yellow"
-                        >Попробовать</NuxtLink
-                    >
                 </div>
             </div>
         </section>
@@ -119,44 +75,43 @@
         <!-- Reviews Section -->
         <section class="reviews">
             <div class="wrap">
-                <h2 class="section-title">Что говорят клиенты</h2>
-                <div class="reviews-grid">
-                    <div
-                        v-for="review in reviews"
-                        :key="review.id"
-                        class="review-card"
-                        :style="{ borderColor: review.color }"
-                    >
-                        <div class="review-header">
-                            <div class="review-avatar">
-                                {{ review.author[0] }}
-                            </div>
-                            <div class="review-meta">
-                                <span class="review-author">{{
-                                    review.author
-                                }}</span>
-                                <span class="review-rating"
-                                    >{{ "★".repeat(review.rating)
-                                    }}{{ "☆".repeat(5 - review.rating) }}</span
-                                >
+                <div class="sec-head">
+                    <h2>Говорят <em>гости</em></h2>
+                    <p>4.9 из 5 — и мы не планируем останавливаться</p>
+                </div>
+                <div class="rev-grid">
+                    <div v-for="r in reviews" :key="r.id" class="rev">
+                        <div class="stars">{{ "★".repeat(r.rating) }}</div>
+                        <p>{{ r.text }}</p>
+                        <div class="rev__who">
+                            <span
+                                class="rev__ava"
+                                :style="{ background: r.color }"
+                                >{{ r.author[0] }}</span
+                            >
+                            <div>
+                                <b>{{ r.author }}</b
+                                ><span>{{ r.meta }}</span>
                             </div>
                         </div>
-                        <p class="review-text">{{ review.text }}</p>
-                        <span class="review-date">{{ review.meta }}</span>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- CTA Section -->
-        <section class="cta-section">
+        <!-- Delivery Steps Section -->
+        <section class="delivery">
             <div class="wrap">
-                <div class="cta-content">
-                    <h2>Готов заказать?</h2>
-                    <p>Выбирай свою идеальную шаурму прямо сейчас</p>
-                    <NuxtLink to="/menu" class="btn btn--red btn--lg"
-                        >Перейти в меню</NuxtLink
-                    >
+                <div class="sec-head">
+                    <h2>Как <em>заказать</em></h2>
+                    <p>От клика до горячей шаурмы — четыре шага</p>
+                </div>
+                <div class="steps">
+                    <div v-for="s in stepsData" :key="s.n" class="step">
+                        <div class="step__n">{{ s.n }}</div>
+                        <h3>{{ s.title }}</h3>
+                        <p>{{ s.text }}</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -164,19 +119,89 @@
 </template>
 
 <script setup>
-import { PRODUCTS } from "~/composables/useCart";
+import { computed, ref } from "vue";
+import { useProductStore } from "~/stores/products";
+import { useCartStore } from "~/stores/cart";
+import { useOrderStore } from "~/stores/orders";
+import { fmt } from "~/composables/useUtils";
 
-const popularProducts = computed(() => {
-    return PRODUCTS.filter((p) => p.pop || p.badge === "hit").slice(0, 4);
+const productStore = useProductStore();
+const cartStore = useCartStore();
+const orderStore = useOrderStore();
+
+const hitProduct = computed(() => {
+    const top = orderStore.topProducts;
+    if (!top.length) return null;
+    return productStore.items.find((p) => p.name === top[0].name) || null;
 });
 
-const reviews = ref([
+const topProductPrice = computed(() => {
+    if (!hitProduct.value) return "199 ₽";
+    return hitProduct.value.price + " ₽";
+});
+
+const orbit = ["🌿", "🧅", "🍅", "🧄", "🌶️"];
+
+
+const quickAdd = (id, event) => {
+    const product = productStore.items.find((p) => p.id === id);
+    if (product) {
+        cartStore.addToCart(product, 1, "Стандарт");
+        createFly(event);
+    }
+};
+
+const createFly = (event) => {
+    const el = document.createElement("div");
+    el.className = "fly";
+    const rect = event.target.getBoundingClientRect();
+    el.style.left = rect.left + rect.width / 2 - 8 + "px";
+    el.style.top = rect.top + rect.height / 2 - 8 + "px";
+    document.body.appendChild(el);
+    requestAnimationFrame(() => {
+        el.style.transition = "all 0.7s cubic-bezier(0.22,1,0.36,1)";
+        el.style.left = "calc(100vw - 100px)";
+        el.style.top = "20px";
+        el.style.transform = "scale(0.2)";
+        el.style.opacity = "0";
+    });
+    setTimeout(() => el.remove(), 800);
+};
+
+const why = [
+    {
+        num: "01",
+        ico: "heart",
+        title: "Свежее мясо",
+        text: "Курицу и свинину привозят каждое утро — никакой заморозки, только охлаждёнка.",
+    },
+    {
+        num: "02",
+        ico: "star",
+        title: "Овощи день в день",
+        text: "Режем на салаты утром. То, что не продали — не используем.",
+    },
+    {
+        num: "03",
+        ico: "message",
+        title: "Авторские соусы",
+        text: "Двенадцать видов соусов собственного приготовления. Рецепты не раскрываем.",
+    },
+    {
+        num: "04",
+        ico: "clock",
+        title: "Три минуты",
+        text: "Среднее время сборки — три минуты. Не ждёшь — успеваешь.",
+    },
+];
+
+const reviews = [
     {
         id: 1,
         author: "Алексей М.",
         rating: 5,
         text: "Лучшая шаурма в городе! Особенно нравится острая с халапеньо. Готовят быстро, всегда свежее.",
-        color: "#FFD9D9",
+        color: "#d62828",
         meta: "2 дня назад",
     },
     {
@@ -184,7 +209,7 @@ const reviews = ref([
         author: "Мария К.",
         rating: 5,
         text: "Заказываю доставку уже третий раз — всё отлично! Упаковано аккуратно, горячее, курьер вежливый.",
-        color: "#FFF3C4",
+        color: "#f77f00",
         meta: "Неделю назад",
     },
     {
@@ -192,14 +217,35 @@ const reviews = ref([
         author: "Дмитрий В.",
         rating: 4,
         text: "Вкусно, сытно, недорого. Классическая шаурма — топ! Иногда бывают очереди, но оно того стоит.",
-        color: "#E8E0D5",
+        color: "#fcbf49",
         meta: "2 недели назад",
     },
-]);
+];
 
-definePageMeta({
-    layout: "default",
-});
+const stepsData = [
+    {
+        n: 1,
+        title: "Выбери позиции",
+        text: "Листай меню, добавляй в корзину любые шаурмы, напитки и дополнения.",
+    },
+    {
+        n: 2,
+        title: "Оформи заказ",
+        text: "Укажи адрес, выбери доставку или самовывоз — и нажми «Заказать».",
+    },
+    {
+        n: 3,
+        title: "Мы готовим",
+        text: "Повар собирает твой заказ за 3 минуты. Мясо на гриле, овощи нарезаются.",
+    },
+    {
+        n: 4,
+        title: "Получаешь",
+        text: "Курьер привозит заказ за 30 минут или ждём тебя у стойки. Приятного!",
+    },
+];
+
+definePageMeta({ layout: "default" });
 </script>
 
 <style scoped>
@@ -207,436 +253,105 @@ definePageMeta({
     min-height: 100vh;
 }
 
-/* Hero Section */
-.hero {
-    padding: 80px 0 100px;
-    overflow: hidden;
-}
-
-.hero__in {
-    display: grid;
-    grid-template-columns: 1.05fr 0.95fr;
-    gap: 60px;
-    align-items: center;
-}
-
-@media (max-width: 900px) {
-    .hero__in {
-        grid-template-columns: 1fr;
-        text-align: center;
-    }
-}
-
-.kicker {
-    display: inline-flex;
-    align-items: center;
-    gap: 9px;
-    background: #fff;
-    border: 2px solid rgba(214, 40, 40, 0.22);
-    color: var(--red);
-    font-weight: 700;
-    font-size: 12px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    padding: 8px 15px;
-    border-radius: 99px;
-    margin-bottom: 24px;
-}
-
-.hero h1 {
-    font-size: clamp(42px, 6vw, 72px);
-    font-weight: 900;
-    line-height: 1;
-    letter-spacing: -0.03em;
-    text-transform: uppercase;
-    margin-bottom: 24px;
-}
-
-.hero h1 .r2 {
-    display: block;
-    color: var(--red);
-}
-
-.hero h1 .r3 {
-    display: block;
-    color: transparent;
-    -webkit-text-stroke: 2px var(--ink);
-    font-size: 0.9em;
-}
-
-.hero__sub {
-    font-size: 18px;
-    color: rgba(34, 34, 34, 0.72);
-    max-width: 480px;
-    margin-bottom: 32px;
-    line-height: 1.6;
-}
-
-.hero__sub b {
-    color: #222;
-}
-
-.hero__cta {
-    display: flex;
-    gap: 14px;
-    flex-wrap: wrap;
-}
-
-@media (max-width: 900px) {
-    .hero__cta {
-        justify-content: center;
-    }
-}
-
-.btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    border: none;
-    border-radius: 16px 16px 16px 4px;
-    padding: 16px 32px;
-    font-weight: 800;
-    font-size: 15px;
-    cursor: pointer;
-    text-decoration: none;
-    transition: 0.22s;
-}
-
-.btn--red {
-    background: var(--red);
-    color: #fff;
-    box-shadow: var(--sh-warm);
-}
-
-.btn--red:hover {
-    background: var(--red-d);
-    transform: translateY(-3px);
-}
-
-.btn--ghost {
-    background: transparent;
-    color: var(--ink);
-    border: 2px solid rgba(34, 34, 34, 0.22);
-}
-
-.btn--ghost:hover {
-    border-color: var(--orange);
-    color: var(--orange);
-    transform: translateY(-3px);
-}
-
-.btn--yellow {
-    background: var(--yellow);
-    color: var(--ink);
-    box-shadow: 0 18px 40px -14px rgba(252, 191, 73, 0.55);
-}
-
-.btn--yellow:hover {
-    transform: translateY(-3px);
-}
-
-.hero__stats {
-    display: flex;
-    gap: 48px;
-    margin-top: 56px;
-    flex-wrap: wrap;
-}
-
-@media (max-width: 900px) {
-    .hero__stats {
-        justify-content: center;
-    }
-}
-
-.stat b {
-    display: block;
-    font-size: 32px;
-    font-weight: 800;
-    letter-spacing: -0.02em;
-}
-
-.stat b i {
-    font-style: normal;
-    color: var(--orange);
-}
-
-.stat span {
-    font-size: 13px;
-    color: rgba(34, 34, 34, 0.55);
-    font-weight: 500;
-}
-
-/* Stage Animation */
 .stage {
     position: relative;
-    height: 450px;
+    height: 500px;
     display: grid;
     place-items: center;
 }
-
 .stage__ring {
     position: absolute;
-    width: 380px;
-    height: 380px;
+    width: 400px;
+    height: 400px;
     border-radius: 50%;
     border: 2px dashed rgba(214, 40, 40, 0.32);
     animation: spin 44s linear infinite;
 }
-
 @keyframes spin {
-    to {
-        transform: rotate(360deg);
-    }
+    to { transform: rotate(360deg); }
 }
-
-.stage__hero-emoji {
-    font-size: 180px;
-    filter: drop-shadow(0 25px 50px rgba(214, 40, 40, 0.25));
-    animation: float 3s ease-in-out infinite;
-}
-
-@keyframes float {
-    0%,
-    100% {
-        transform: translateY(0);
-    }
-    50% {
-        transform: translateY(-20px);
-    }
-}
-
-/* Features Section */
-.features {
-    padding: 80px 0;
-    background: linear-gradient(
-        180deg,
-        transparent,
-        rgba(252, 191, 73, 0.08),
-        transparent
-    );
-}
-
-.section-title {
-    font-size: clamp(28px, 4vw, 42px);
-    font-weight: 900;
-    text-align: center;
-    margin-bottom: 48px;
-    letter-spacing: -0.02em;
-}
-
-.features-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 32px;
-}
-
-.feature-card {
-    background: #fff;
-    border-radius: 20px;
-    padding: 32px 24px;
-    text-align: center;
-    box-shadow: 0 10px 40px -20px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s;
-}
-
-.feature-card:hover {
-    transform: translateY(-5px);
-}
-
-.feature-icon {
-    font-size: 48px;
-    margin-bottom: 16px;
-}
-
-.feature-card h3 {
-    font-size: 20px;
-    font-weight: 700;
-    margin-bottom: 12px;
-    color: #222;
-}
-
-.feature-card p {
-    font-size: 14px;
-    color: rgba(34, 34, 34, 0.65);
-    line-height: 1.6;
-}
-
-/* Popular Products */
-.popular {
-    padding: 80px 0;
-}
-
-.section-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 40px;
-}
-
-.view-all {
-    color: var(--red);
-    font-weight: 600;
-    text-decoration: none;
-    transition: 0.2s;
-}
-
-.view-all:hover {
-    color: var(--red-d);
-}
-
-.products-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 24px;
-}
-
-/* Promo Banner */
-.promo-banner {
-    padding: 60px 0;
-}
-
-.promo-content {
-    background: linear-gradient(135deg, var(--yellow) 0%, var(--orange) 100%);
-    border-radius: 24px;
-    padding: 48px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 32px;
-}
-
-@media (max-width: 768px) {
-    .promo-content {
-        flex-direction: column;
-        text-align: center;
-        padding: 32px;
-    }
-}
-
-.promo-label {
-    display: inline-block;
-    background: #fff;
-    padding: 6px 14px;
-    border-radius: 99px;
-    font-size: 12px;
-    font-weight: 700;
-    margin-bottom: 16px;
-}
-
-.promo-text h2 {
-    font-size: 32px;
-    font-weight: 800;
-    margin-bottom: 12px;
-}
-
-.promo-text p {
-    font-size: 16px;
-    opacity: 0.9;
-}
-
-.promo-text b {
-    background: #fff;
-    padding: 2px 10px;
-    border-radius: 6px;
-}
-
-/* Reviews Section */
-.reviews {
-    padding: 80px 0;
-    background: rgba(252, 191, 73, 0.05);
-}
-
-.reviews-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 24px;
-}
-
-.review-card {
-    background: #fff;
-    border: 2px solid;
-    border-radius: 20px;
-    padding: 28px;
-    transition: transform 0.2s;
-}
-
-.review-card:hover {
-    transform: translateY(-3px);
-}
-
-.review-header {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    margin-bottom: 16px;
-}
-
-.review-avatar {
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    background: var(--orange);
-    color: #fff;
-    display: grid;
-    place-items: center;
-    font-weight: 700;
-    font-size: 18px;
-}
-
-.review-meta {
+.grill {
+    position: relative;
     display: flex;
     flex-direction: column;
+    align-items: center;
+    z-index: 3;
+    overflow: visible;
+}
+.grill__glow {
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 260px; height: 260px;
+    border-radius: 50%;
+    margin: -130px 0 0 -130px;
+    background: radial-gradient(circle at 50% 42%, rgba(247,127,0,0.42), rgba(252,191,73,0.16) 52%, transparent 72%);
+    animation: breathe 3s ease-in-out infinite;
+    z-index: -1;
+}
+@keyframes breathe {
+    50% { opacity: 0.7; }
+}
+.grill__tray {
+    width: 216px; height: 15px; border-radius: 8px;
+    background: linear-gradient(#9ca3af, #6b7280);
+    margin-top: 8px; box-shadow: 0 10px 24px rgba(0,0,0,0.22); z-index: 3;
+}
+.grill__steam {
+    position: absolute; top: -34px; left: 50%; transform: translateX(-50%);
+    display: flex; gap: 15px; z-index: 5;
+}
+.grill__steam b {
+    width: 7px; height: 46px; border-radius: 99px;
+    background: linear-gradient(to top, rgba(255,255,255,0), rgba(255,255,255,0.9));
+    filter: blur(3px); animation: rise 2.6s ease-in-out infinite;
+}
+.grill__steam b:nth-child(2) { animation-delay: 0.7s; height: 58px; }
+.grill__steam b:nth-child(3) { animation-delay: 1.3s; }
+@keyframes rise {
+    0% { transform: translateY(16px) scaleY(0.5); opacity: 0; }
+    45% { opacity: 0.95; }
+    100% { transform: translateY(-32px) scaleY(1.1); opacity: 0; }
+}
+.orbit {
+    position: absolute; width: 440px; height: 440px;
+    animation: spin 28s linear infinite; z-index: 2;
+}
+.orbit span {
+    position: absolute; font-size: 40px;
+    filter: drop-shadow(0 6px 10px rgba(34,34,34,0.22));
+}
+.orbit span:nth-child(1) { top: -8px; left: 50%; }
+.orbit span:nth-child(2) { top: 50%; right: -12px; }
+.orbit span:nth-child(3) { bottom: -6px; left: 46%; }
+.orbit span:nth-child(4) { top: 46%; left: -14px; }
+.orbit span:nth-child(5) { top: 10%; right: 6%; }
+.sticker {
+    position: absolute; z-index: 6; font-weight: 800; text-transform: uppercase;
+    letter-spacing: 0.04em; box-shadow: 0 12px 26px -10px rgba(34,34,34,0.4);
+    animation: float 6s ease-in-out infinite;
+}
+@keyframes float {
+    50% { transform: translateY(-10px); }
+}
+.sticker--hit {
+    top: 56px; right: 4px;
+    background: var(--yellow); color: var(--ink);
+    padding: 10px 16px; border-radius: 4px 16px 4px 16px;
+    transform: rotate(6deg); font-size: 13px;
+}
+.sticker--price {
+    bottom: 64px; left: -6px;
+    background: var(--red); color: #fff;
+    padding: 14px 20px; border-radius: 16px 4px 16px 4px;
+    transform: rotate(-5deg); font-size: 14px; animation-delay: 1.1s;
+}
+.sticker--price b {
+    font-size: 25px; display: block; letter-spacing: -0.02em;
 }
 
-.review-author {
-    font-weight: 600;
-    color: var(--ink);
-}
-
-.review-rating {
-    color: var(--yellow);
-    font-size: 14px;
-}
-
-.review-text {
-    color: rgba(34, 34, 34, 0.72);
-    line-height: 1.6;
-    margin-bottom: 16px;
-}
-
-.review-date {
-    font-size: 12px;
-    color: rgba(34, 34, 34, 0.45);
-}
-
-/* CTA Section */
-.cta-section {
-    padding: 100px 0;
-}
-
-.cta-content {
-    background: #222;
-    border-radius: 24px;
-    padding: 64px 48px;
-    text-align: center;
-    color: #fff;
-}
-
-.cta-content h2 {
-    font-size: 36px;
-    font-weight: 800;
-    margin-bottom: 12px;
-}
-
-.cta-content p {
-    font-size: 18px;
-    opacity: 0.8;
-    margin-bottom: 32px;
-}
-
-.btn--lg {
-    padding: 18px 42px;
-    font-size: 17px;
+.product-visual {
+    width: 120px; height: 140px; border-radius: 20px;
+    display: grid; place-items: center; font-size: 60px;
+    z-index: 3; box-shadow: 0 10px 30px rgba(0,0,0,0.2);
 }
 </style>

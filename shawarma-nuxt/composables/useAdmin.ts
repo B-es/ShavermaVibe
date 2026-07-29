@@ -5,7 +5,7 @@
 import { ref, computed } from 'vue'
 import type { Product, Order, Review } from '~/types/product'
 
-export const ORDER_STATUSES = [
+const ORDER_STATUSES = [
   { id: 'new', label: 'Новый' },
   { id: 'confirmed', label: 'Подтверждён' },
   { id: 'cooking', label: 'Готовится' },
